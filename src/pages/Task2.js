@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCase2Async, resData } from "../redux/reducerData";
+import { getCase2Async, resData } from "../redux/reducerSlice";
 import {
   Box,
   Button,
@@ -68,7 +68,7 @@ const Task2 = () => {
               }}
               variant="outlined"
             >
-              <Box style={{ width: "15%", marginRight: 20 }}>
+              <Box style={{ width: "10%", marginRight: 20 }}>
                 <CardMedia
                   component="img"
                   height="100%"

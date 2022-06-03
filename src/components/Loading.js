@@ -4,7 +4,7 @@ import React from "react";
 import LoadingOverlay from "react-loading-overlay";
 import "./Loading.css";
 import { useSelector } from "react-redux";
-import { isLoading } from "../redux/reducerData";
+import { isLoading } from "../redux/reducerSlice";
 
 const Loading = () => {
   const loading = useSelector(isLoading);
@@ -28,7 +28,7 @@ const Loading = () => {
       `}
   `;
   return (
-    <DarkBackground disappear={!loading}>
+    <DarkBackground disappear={loading}>
       <LoadingOverlay
         active={true}
         spinner={true}

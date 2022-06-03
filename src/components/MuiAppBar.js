@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { reduxReset } from "../redux/reducerData";
+import { reduxReset } from "../redux/reducerSlice";
 import { Tasks } from "../router/routerConstants";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";

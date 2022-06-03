@@ -4,17 +4,17 @@ import { apiConfig } from "../config";
 const axios = require("axios");
 
 const initialState = {
-  data: [],
-  isLoading: true,
+  resData: [],
+  isLoading: false,
   offersCount: 0,
 };
 
-export const dataSlide = createSlice({
-  name: "data",
+export const taskSlice = createSlice({
+  name: "task",
   initialState,
   reducers: {
     getData: (state, action) => {
-      state.data = action.payload;
+      state.resData = action.payload;
     },
     setLoading: (state, action) => {
       state.isLoading = action.payload;
@@ -23,17 +23,17 @@ export const dataSlide = createSlice({
       state.offersCount = action.payload;
     },
     getOffersData: (state, action) => {
-      state.data = [...state.data, action.payload];
+      state.resData = [...state.resData, action.payload];
     },
-    reset: (state, action) => {
-      state.data = [];
-      state.isLoading = true;
+    reset: (state) => {
+      state.resData = [];
+      state.isLoading = false;
       state.offersCount = 0;
     },
   },
 });
 
-export const getCase1Async = (data) => async (dispatch) => {
+export const getCase1Async = () => async (dispatch) => {
   try {
     const response = await axios.get(`${apiConfig.REACT_APP_API_URL}`);
     dispatch(getData(response.data.offerList));
@@ -42,20 +42,20 @@ export const getCase1Async = (data) => async (dispatch) => {
   }
 };
 
-export const getCase2Async = (data) => async (dispatch) => {
-  dispatch(setLoading(false));
+export const getCase2Async = () => async (dispatch) => {
+  dispatch(setLoading(true));
   try {
     const response = await axios.get(`${apiConfig.REACT_APP_API_URL2}`);
     dispatch(getData(response.data.offerList));
   } catch (err) {
     throw new Error(err);
   } finally {
-    dispatch(setLoading(true));
+    dispatch(setLoading(false));
   }
 };
 
 export const getCase3Async = (data) => async (dispatch) => {
-  dispatch(setLoading(false));
+  dispatch(setLoading(true));
   try {
     const response = await axios.get(`${apiConfig.REACT_APP_API_URL3}`);
     dispatch(getOffersData(response.data));
@@ -63,11 +63,11 @@ export const getCase3Async = (data) => async (dispatch) => {
   } catch (err) {
     throw new Error(err);
   } finally {
-    dispatch(setLoading(true));
+    dispatch(setLoading(false));
   }
 };
 
-export const getOfferCountAsync = (data) => async (dispatch) => {
+export const getOfferCountAsync = () => async (dispatch) => {
   try {
     const response = await axios.get(`${apiConfig.REACT_APP_API_URL4}`);
     dispatch(getOffers(response.data));
@@ -76,15 +76,15 @@ export const getOfferCountAsync = (data) => async (dispatch) => {
   }
 };
 
-export const reduxReset = (data) => async (dispatch) => {
+export const reduxReset = () => async (dispatch) => {
   dispatch(reset());
 };
 
 export const { getData, setLoading, getOffers, getOffersData, reset } =
-  dataSlide.actions;
+  taskSlice.actions;
 
-export const resData = (state) => state.data.data;
-export const isLoading = (state) => state.data.isLoading;
-export const offersCount = (state) => state.data.offersCount;
+export const resData = (state) => state.task.resData;
+export const isLoading = (state) => state.task.isLoading;
+export const offersCount = (state) => state.task.offersCount;
 
-export default dataSlide.reducer;
+export default taskSlice.reducer;

@@ -5,7 +5,7 @@ import {
   getOfferCountAsync,
   resData,
   offersCount,
-} from "../redux/reducerData";
+} from "../redux/reducerSlice";
 import {
   Box,
   Button,
@@ -136,7 +136,7 @@ const Task3 = () => {
               }}
               variant="outlined"
             >
-              <Box style={{ width: "15%", marginRight: 20 }}>
+              <Box style={{ width: "10%", marginRight: 20 }}>
                 <CardMedia
                   component="img"
                   height="100%"
